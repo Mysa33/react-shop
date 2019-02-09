@@ -1,0 +1,41 @@
+@import '../main';
+.container-fluid{
+    padding:0px;
+    height:78px;
+    .header-container{
+        height:78px;
+        background-color: $bg-main-color;
+        
+        border: .25px solid $main-btn-bg!important;
+        box-shadow: 0px 2px 4px 1px rgba(0,0,0,.2);
+        .container{
+            height:78px;
+            padding:0px;
+            header{
+                height:78px;
+                nav{
+                    height:78px;
+                    ul{
+                        display: inline!important;
+                        li{
+                            display: inline!important;
+                            margin-left:10px;
+                            font-size:1.2em;
+                            a{
+                                text-decoration: none!important;
+                                text-transform: captilalize;
+                                font-weight: 500;
+                                color:#fff;
+                            }
+                            a, i{
+                                display: table-cell;
+                                line-height: 48px;
+                                vertical-align: middle;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

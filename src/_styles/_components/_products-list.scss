@@ -1,0 +1,37 @@
+@import '../main';
+.products-list-container{
+    .col-lg-4{margin-bottom:15px;}
+    margin-top:130px;
+    .card{
+        img{
+            width:80%;
+            margin: auto;
+        }
+        .card-body{
+            .card-title{
+                color:$main-txt-color;
+            }
+            strong{
+                color:red;
+            }
+            .card-text{
+                color:green;
+            }
+            .add-to-cart{
+                color:#fff;
+                background-color:$bg-main-color;
+            }
+            .remove-from-cart{
+                color:$main-txt-color;
+            }
+            .add-to-cart, .remove-from-cart{
+                box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.1);
+                i, span{
+                    display: table-cell;
+                    line-height: 24px;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}
