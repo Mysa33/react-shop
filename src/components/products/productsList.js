@@ -78,6 +78,16 @@ class ProductsList extends React.Component {
         })
         .then(result => this.setState({data: result, isFetching: false}))
         .catch(e => console.log(e));
+        //check cart
+        var storedData = JSON.parse(localStorage.getItem("Cart"));
+        if((storedData !== null)&&((storedData.total>0))) {
+            this.setState({
+                total:storedData.total,
+                cart:storedData.data
+            });
+        }else{
+            return;
+        }
 
     }
     
