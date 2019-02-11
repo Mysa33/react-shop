@@ -12,8 +12,14 @@ class App extends Component {
        'data':[],
         'total':0
     };
-    var storageName = "Cart"
-    localStorage.setItem(storageName, JSON.stringify(initCart));
+    var storageName = "Cart";
+    var isExist = localStorage.getItem(storageName);
+    if(isExist !== null){
+      return;
+    }else{
+      localStorage.setItem(storageName, JSON.stringify(initCart));
+    }
+    
   }
 
   render() {
