@@ -20,7 +20,8 @@ class ProductsList extends React.Component {
     addTocart (e, data, cart) {
         
         cart.push(data);
-        this.updateTotal(cart)
+        this.updateTotal(cart);
+
     }
 
     removeFromCart (e, items, cart) {
@@ -53,7 +54,20 @@ class ProductsList extends React.Component {
         this.setState({
             total: priceArray.reduce(reducer).toFixed(2)
         });
+        let total = priceArray.reduce(reducer).toFixed(2);
+        this.shareData(cart, total);
         
+    }
+
+    shareData(cart, total) {
+        
+        var storageName = "Cart";
+        var data = {
+            "data":cart,
+            "total":total,
+            "valid":false
+        }
+        localStorage.setItem(storageName, JSON.stringify(data));
     }
     
     componentDidMount() {

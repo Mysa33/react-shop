@@ -13,8 +13,8 @@ class CartContent extends React.Component {
     }
     
     componentDidMount() {
-        var data = localStorage.getItem("Cart");
-        console.log("data :", data);
+        
+        
     }
     
     render(){
