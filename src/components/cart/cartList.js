@@ -51,10 +51,25 @@ class CartList extends React.Component {
     render(){
 
         var items = this.state.data;
+        var cartMsg;
+        if(this.state.valid){
+            cartMsg = 
+                <div className="row">
+                    <div className="alert alert-success">
+                        Tour cart is valid
+                    </div>
+                </div>
+        }else{
+            cartMsg = 
+                <div className="row">
+                    <div className="alert alert-danger">
+                       Please validate your cart
+                    </div>
+                </div> 
+        }
 
         if(items.length){
             var itemList;
-            console.log(items);
             itemList = items.map((items, i)=>
                 <li key={i} className="list-group-item">
                     <div className="row">
@@ -70,11 +85,11 @@ class CartList extends React.Component {
                             {items.price}
                         </div>
                     </div>
-                </li>
-                
+                </li>  
             );
             return(
                 <div className="container cart-list-container">
+                    {cartMsg}
                     <div className="row">
                         <div className="cart-list-wrapper">
                             <ul className="list-group">
