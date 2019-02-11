@@ -99,7 +99,7 @@ class ProductsList extends React.Component {
         if(items.length){
             var prodsNb = items.length;
             var listItems = items.map((items) =>        
-                <div className="col-lg-4" key={items.id}>
+                <div className="col-lg-4 col-md-6 col-sm-6 col-xs-12" key={items.id}>
                     <div className="card">
                         <img src={items.api_featured_image} className="card-img-top" alt={items.name}/>
                         <hr/>
