@@ -10,8 +10,10 @@ class CartList extends React.Component {
             data:[],
             valid:false,
             subTotal:0,
-            total:0
+            total:0,
+            inputValue:''
         };
+        this.applyPromo = this.applyPromo.bind(this);
 
     }
     
@@ -56,7 +58,52 @@ class CartList extends React.Component {
             valid:false
         });
 
-        localStorage.setItem("Cart",JSON.stringify(localData));
+        localStorage.setItem("Cart", JSON.stringify(localData));
+    }
+
+    caclPromo(){
+        
+        var actualPrice;
+        var comOffer;
+        var newPrice;
+        actualPrice = this.state.total;
+        comOffer = ((actualPrice /100) * 5).toFixed(2);
+        if(actualPrice>0){
+            newPrice = actualPrice - comOffer;
+            this.setState({
+                total:newPrice
+            })
+        }
+    }
+
+    applyPromo(e) {
+
+        var input;
+        var inputValue;
+        var checkCode;
+        var promoCode = 'LaJavaness';
+        promoCode = promoCode.toString();
+        promoCode = promoCode.toString();
+        if (this.refs.myInput !== null) {
+            input = this.refs.myInput;
+            inputValue = input.value;
+            inputValue = inputValue.toString();
+            checkCode = inputValue.localeCompare(promoCode);
+            if(checkCode !== -1){
+                let localData;
+                this.caclPromo();
+                localData = {
+                    data:this.state.data,
+                    total:this.state.total,
+                    valid:this.state.valid
+                };
+                localStorage.setItem("Cart", JSON.stringify(localData));
+                input.value = "";
+
+            }else{
+                alert("Invalid code");
+            }
+        }
     }
     
     render(){
@@ -79,7 +126,7 @@ class CartList extends React.Component {
                     </div>
                 </div> 
         }
-        // Empty cart Msg
+        //Empty cart Msg
         if(items.length){
             var emptyCart = 
                 <div className="row">
@@ -95,7 +142,7 @@ class CartList extends React.Component {
                 </div>
             </div>
         }
-        // Cart items list
+        //Cart items list
         if(items.length){
             var itemList;
             itemList = items.map((items, i)=>
@@ -128,29 +175,20 @@ class CartList extends React.Component {
                     </div>
                     <br/>
                     <div className="row">
-
                         <div className = "col-lg-8">
-
                             <h6>Sub-Total : {this.state.subTotal}</h6>
-
                             <h6>V.A.T : 20%</h6>
-
                             <h4>Total  : {this.state.total} $</h4>
-
                         </div>
-
                         <div className="col-lg-4">
-                        
                             <div className="input-group mb-3">
-                                <input type="text" className="form-control" placeholder="Enter code"/>
+                                <input ref="myInput" type="text" className="form-control" placeholder="Enter code"/>
                                 <div className="input-group-append">
                                     <span className="input-group-text">Promo code</span>
                                 </div>
                             </div>
-                            <button type="button" className="btn btn-info">Confirm code</button>
-
+                            <button onClick={((e) => this.applyPromo())} type="button" className="btn btn-info">Confirm code</button>
                         </div>
-
                     </div>
                     <hr/>
                     <div className="row">
