@@ -1,9 +1,12 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Loader from '../loader';
+
 
 class CartList extends React.Component {
     
     constructor(props) {
+
         super(props);
 
         this.state = {
@@ -11,9 +14,11 @@ class CartList extends React.Component {
             valid:false,
             subTotal:0,
             total:0,
-            inputValue:''
+            inputValue:'',
+            promo:false
         };
         this.applyPromo = this.applyPromo.bind(this);
+        this.submitCart = this.submitCart.bind(this);
 
     }
     
@@ -51,14 +56,23 @@ class CartList extends React.Component {
             data:[],
             total:0,
             valid:false
-        }
+        };
         this.setState({
             data:[],
             total:0,
             valid:false
         });
-
         localStorage.setItem("Cart", JSON.stringify(localData));
+       
+    }
+
+    submitCart(){
+
+        var total;
+        var data;
+        var promoCode;
+        var modalData;
+
     }
 
     caclPromo(){
@@ -69,10 +83,11 @@ class CartList extends React.Component {
         actualPrice = this.state.total;
         comOffer = ((actualPrice /100) * 5).toFixed(2);
         if(actualPrice>0){
-            newPrice = actualPrice - comOffer;
+            newPrice = (actualPrice - comOffer).toFixed(2) ;
             this.setState({
-                total:newPrice
-            })
+                total:newPrice,
+                promo:true
+            });
         }
     }
 
@@ -83,9 +98,8 @@ class CartList extends React.Component {
         var checkCode;
         var promoCode = 'LaJavaness';
         promoCode = promoCode.toString();
-        promoCode = promoCode.toString();
-        if (this.refs.myInput !== null) {
-            input = this.refs.myInput;
+        if (this.refs.promoInput !== null) {
+            input = this.refs.promoInput;
             inputValue = input.value;
             inputValue = inputValue.toString();
             checkCode = inputValue.localeCompare(promoCode);
@@ -99,12 +113,13 @@ class CartList extends React.Component {
                 };
                 localStorage.setItem("Cart", JSON.stringify(localData));
                 input.value = "";
-
             }else{
                 alert("Invalid code");
             }
         }
     }
+
+    
     
     render(){
 
@@ -182,21 +197,21 @@ class CartList extends React.Component {
                         </div>
                         <div className="col-lg-4">
                             <div className="input-group mb-3">
-                                <input ref="myInput" type="text" className="form-control" placeholder="Enter code"/>
+                                <input ref="promoInput" type="text" className="form-control" placeholder="Enter code"/>
                                 <div className="input-group-append">
                                     <span className="input-group-text">Promo code</span>
                                 </div>
                             </div>
-                            <button onClick={((e) => this.applyPromo())} type="button" className="btn btn-info">Confirm code</button>
+                            <button onClick={((e) => this.applyPromo())} type="button" className="btn btn-info" disabled={this.state.promo}>Confirm code</button>
                         </div>
                     </div>
                     <hr/>
                     <div className="row">
                         <div className="col-lg-6">
-                            <button type="button" className="btn btn-info">Submit</button>
+                            <button onClick={((e) => this.submitCart())} type="button" className="btn btn-info" disabled={!this.state.valid}>Submit</button>
                         </div>
                         <div className="col-lg-6">
-                            <button onClick={((e) => this.clearCart())} type="button" className="btn btn-danger clear-cart">Clear</button>
+                            <button onClick={((e) => this.clearCart())} type="button" className="btn btn-danger clear-cart"><Link to="/">Clear</Link></button>
                         </div>
                     </div>
                     

@@ -1,5 +1,6 @@
 .cart-list-container{
     margin-top:130px;
+    margin-bottom:75px;
     color:#787878;
     .alert{
         width:100%;
@@ -13,10 +14,11 @@
             }
         }
     }
-    .btn-info{
-        margin-bottom:75px;
-    }
     .clear-cart{
         float:right;
+        a{
+            color:#fff;
+            text-decoration: none;
+        }
     }
 }
