@@ -15,7 +15,6 @@ class CartList extends React.Component {
 
     }
     
-
     componentDidMount() {
         
         var valid;
@@ -43,11 +42,28 @@ class CartList extends React.Component {
             total: finalPrice
         });
     }
+
+    clearCart(){
+
+        let localData = {
+            data:[],
+            total:0,
+            valid:false
+        }
+        this.setState({
+            data:[],
+            total:0,
+            valid:false
+        });
+
+        localStorage.setItem("Cart",JSON.stringify(localData));
+    }
     
     render(){
 
         var items = this.state.data;
         var cartMsg;
+        //Valid status Msg
         if(this.state.valid){
             cartMsg = 
                 <div className="row">
@@ -63,7 +79,23 @@ class CartList extends React.Component {
                     </div>
                 </div> 
         }
-
+        // Empty cart Msg
+        if(items.length){
+            var emptyCart = 
+                <div className="row">
+                    <div className="col-lg-12">
+                        <h5>Items number : {items.length}</h5>
+                    </div>
+                </div>
+        }else{
+            var emptyCart = 
+            <div className="row">
+                <div className="col-lg-12">
+                    <h5>Your cart is empty</h5>
+                </div>
+            </div>
+        }
+        // Cart items list
         if(items.length){
             var itemList;
             itemList = items.map((items, i)=>
@@ -86,6 +118,7 @@ class CartList extends React.Component {
             return(
                 <div className="container cart-list-container">
                     {cartMsg}
+                    {emptyCart}
                     <div className="row">
                         <div className="cart-list-wrapper">
                             <ul className="list-group">
@@ -94,7 +127,6 @@ class CartList extends React.Component {
                         </div>
                     </div>
                     <br/>
-
                     <div className="row">
 
                         <div className = "col-lg-8">
@@ -126,7 +158,7 @@ class CartList extends React.Component {
                             <button type="button" className="btn btn-info">Submit</button>
                         </div>
                         <div className="col-lg-6">
-                            <button type="button" className="btn btn-danger clear-cart">Clear</button>
+                            <button onClick={((e) => this.clearCart())} type="button" className="btn btn-danger clear-cart">Clear</button>
                         </div>
                     </div>
                     
