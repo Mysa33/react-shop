@@ -2,8 +2,6 @@ import React from 'react'
 
 class ShoppingList extends React.Component {
 
-  
-
   render() {
     return (
         <div>
@@ -21,5 +19,6 @@ class ShoppingList extends React.Component {
         </div>
     );
   }
+
 }
 export default ShoppingList;

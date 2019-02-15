@@ -38,7 +38,7 @@ class ProductsList extends React.Component {
         this.setState({
             cart: cart
         });
-        if(cart.length>0){
+        if(cart.length>=0){
             this.updateTotal(cart);
         }
         
@@ -51,10 +51,18 @@ class ProductsList extends React.Component {
         for(let i in cart){
             priceArray.push(parseFloat(cart[i].price));
         }
-        this.setState({
-            total: priceArray.reduce(reducer).toFixed(2)
-        });
-        let total = priceArray.reduce(reducer).toFixed(2);
+        if(cart.length>0){
+            this.setState({
+                total: priceArray.reduce(reducer).toFixed(2)
+            });
+            var total = priceArray.reduce(reducer).toFixed(2);
+        }else{
+            this.setState({
+                total: 0
+            });
+            var total = 0;
+        }
+        
         this.shareData(cart, total);
         
     }

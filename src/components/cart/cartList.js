@@ -30,11 +30,7 @@ class CartList extends React.Component {
             data:data
         });
         this.calcTotal(subT);
-        if(valid){
-            console.log("cart is valid");
-        }else{
-            console.log("cart is NOT valid");
-        }
+
     }
 
     calcTotal(price){
@@ -63,7 +59,7 @@ class CartList extends React.Component {
             cartMsg = 
                 <div className="row">
                     <div className="alert alert-danger">
-                       Please validate your cart
+                       Please confirm your cart.
                     </div>
                 </div> 
         }
@@ -116,14 +112,24 @@ class CartList extends React.Component {
                             <div className="input-group mb-3">
                                 <input type="text" className="form-control" placeholder="Enter code"/>
                                 <div className="input-group-append">
-                                    <span className="input-group-text">Use code</span>
+                                    <span className="input-group-text">Promo code</span>
                                 </div>
                             </div>
-                            <button type="text">Confirm code</button>
+                            <button type="button" className="btn btn-info">Confirm code</button>
 
                         </div>
 
                     </div>
+                    <hr/>
+                    <div className="row">
+                        <div className="col-lg-6">
+                            <button type="button" className="btn btn-info">Submit</button>
+                        </div>
+                        <div className="col-lg-6">
+                            <button type="button" className="btn btn-danger clear-cart">Clear</button>
+                        </div>
+                    </div>
+                    
                 </div>
             );
         }else{
