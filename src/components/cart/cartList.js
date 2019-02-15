@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Loader from '../loader';
+import Modal from '../modal/modal';
+import ClearCart from '../clearBtn/clearCart';
 
 
 class CartList extends React.Component {
@@ -48,22 +50,6 @@ class CartList extends React.Component {
             subTotal:price,
             total: finalPrice
         });
-    }
-
-    clearCart(){
-
-        let localData = {
-            data:[],
-            total:0,
-            valid:false
-        };
-        this.setState({
-            data:[],
-            total:0,
-            valid:false
-        });
-        localStorage.setItem("Cart", JSON.stringify(localData));
-       
     }
 
     submitCart(){
@@ -178,43 +164,47 @@ class CartList extends React.Component {
                 </li>  
             );
             return(
-                <div className="container cart-list-container">
-                    {cartMsg}
-                    {emptyCart}
-                    <div className="row">
-                        <div className="cart-list-wrapper">
-                            <ul className="list-group">
-                               {itemList} 
-                            </ul>
-                        </div>
-                    </div>
-                    <br/>
-                    <div className="row">
-                        <div className = "col-lg-8">
-                            <h6>Sub-Total : {this.state.subTotal}</h6>
-                            <h6>V.A.T : 20%</h6>
-                            <h4>Total  : {this.state.total} $</h4>
-                        </div>
-                        <div className="col-lg-4">
-                            <div className="input-group mb-3">
-                                <input ref="promoInput" type="text" className="form-control" placeholder="Enter code"/>
-                                <div className="input-group-append">
-                                    <span className="input-group-text">Promo code</span>
-                                </div>
+                <div className="container-fluid">
+                    <Modal></Modal>
+                    <div className="container cart-list-container">
+                        {cartMsg}
+                        {emptyCart}
+                        <div className="row">
+                            <div className="cart-list-wrapper">
+                                <ul className="list-group">
+                                {itemList} 
+                                </ul>
                             </div>
-                            <button onClick={((e) => this.applyPromo())} type="button" className="btn btn-info" disabled={this.state.promo}>Confirm code</button>
                         </div>
+                        <br/>
+                        <div className="row">
+                            <div className = "col-lg-8">
+                                <h6>Sub-Total : {this.state.subTotal}</h6>
+                                <h6>V.A.T : 20%</h6>
+                                <h4>Total  : {this.state.total} $</h4>
+                            </div>
+                            <div className="col-lg-4">
+                                <div className="input-group mb-3">
+                                    <input ref="promoInput" type="text" className="form-control" placeholder="Enter code"/>
+                                    <div className="input-group-append">
+                                        <span className="input-group-text">Promo code</span>
+                                    </div>
+                                </div>
+                                <button onClick={((e) => this.applyPromo())} type="button" className="btn btn-info" disabled={this.state.promo}>Confirm code</button>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div className="row">
+                            <div className="col-lg-6">
+                                <button onClick={((e) => this.submitCart())} type="button" className="btn btn-info" disabled={!this.state.valid}>Submit</button>
+                            </div>
+                            <div className="col-lg-6">
+                                <ClearCart></ClearCart>
+                            </div>
+                        </div>
+                        
                     </div>
-                    <hr/>
-                    <div className="row">
-                        <div className="col-lg-6">
-                            <button onClick={((e) => this.submitCart())} type="button" className="btn btn-info" disabled={!this.state.valid}>Submit</button>
-                        </div>
-                        <div className="col-lg-6">
-                            <button onClick={((e) => this.clearCart())} type="button" className="btn btn-danger clear-cart"><Link to="/">Clear</Link></button>
-                        </div>
-                    </div>
-                    
+                
                 </div>
             );
         }else{
