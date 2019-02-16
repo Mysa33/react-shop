@@ -134,7 +134,11 @@ class ProductsList extends React.Component {
                         {listItems}
                     </div>
                     <div>
-                        <ShoppingList qty = {cart.length} total = {this.state.total}></ShoppingList>
+                        <ShoppingList 
+                            qty = {cart.length} 
+                            total = {this.state.total} 
+                            data = {cart}>
+                        </ShoppingList>
                     </div>
                 </div>
             );

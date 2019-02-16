@@ -96,8 +96,6 @@ class CartList extends React.Component {
             }
         }
     }
-
-    
     
     render(){
 

@@ -27,7 +27,6 @@ class Modal extends React.Component {
         fullDate = fullDate.toString();
         this.setState({cmdNumber:cmdNb + '-' + cmdRef});
         this.setState({cmdDate:fullDate});
-        console.log("fullDate :", fullDate)
         if(promo){
             this.setState({promoTxt:"Code used"});
         }else{
