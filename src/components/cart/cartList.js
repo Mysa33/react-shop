@@ -13,14 +13,14 @@ class CartList extends React.Component {
 
         this.state = {
             data:[],
-            valid:false,
+            valid:true,
             subTotal:0,
             total:0,
             inputValue:'',
-            promo:false
+            promo:false,
+            showModal:false
         };
         this.applyPromo = this.applyPromo.bind(this);
-        this.submitCart = this.submitCart.bind(this);
 
     }
     
@@ -35,7 +35,8 @@ class CartList extends React.Component {
         data = products.data;
         subT = products.total;
         this.setState({
-            data:data
+            data:data,
+            valid:valid
         });
         this.calcTotal(subT);
 
@@ -50,15 +51,6 @@ class CartList extends React.Component {
             subTotal:price,
             total: finalPrice
         });
-    }
-
-    submitCart(){
-
-        var total;
-        var data;
-        var promoCode;
-        var modalData;
-
     }
 
     caclPromo(){
@@ -116,7 +108,7 @@ class CartList extends React.Component {
             cartMsg = 
                 <div className="row">
                     <div className="alert alert-success">
-                        Tour cart is valid
+                        Your cart is valid
                     </div>
                 </div>
         }else{
@@ -165,7 +157,13 @@ class CartList extends React.Component {
             );
             return(
                 <div className="container-fluid">
-                    <Modal></Modal>
+                    <Modal 
+                        style={{display: this.state.modalVis ? 'block' : 'none' }} 
+                        data={this.state.data} total={this.state.total} 
+                        promo={this.state.promo} 
+                        open={this.state.showModal}
+                    >
+                    </Modal>
                     <div className="container cart-list-container">
                         {cartMsg}
                         {emptyCart}
@@ -196,7 +194,7 @@ class CartList extends React.Component {
                         <hr/>
                         <div className="row">
                             <div className="col-lg-6">
-                                <button onClick={((e) => this.submitCart())} type="button" className="btn btn-info" disabled={!this.state.valid}>Submit</button>
+                                <button onClick={() => this.setState({showModal: true})} type="button" className="btn btn-info" disabled={!this.state.valid}>Submit</button>
                             </div>
                             <div className="col-lg-6">
                                 <ClearCart></ClearCart>
