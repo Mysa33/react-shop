@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.scss';
 import ProductsContent from './components/products/productsContent';
 
@@ -10,7 +10,7 @@ class App extends Component {
     var initCart = {
       'valid':false,
        'data':[],
-        'total':0
+       'total':0
     };
     var storageName = "Cart";
     var isExist = localStorage.getItem(storageName);

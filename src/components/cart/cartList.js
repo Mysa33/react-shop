@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Loader from '../loader';
 import Modal from '../modal/modal';
 import ClearCart from '../clearBtn/clearCart';
@@ -45,7 +44,7 @@ class CartList extends React.Component {
     calcTotal(price){
         
         price = parseFloat(price);
-        var vatVal = (price/100)*20;
+        //var vatVal = (price/100)*20;
         var finalPrice = (price + ((price/100) * 20)).toFixed(2);
         this.setState({
             subTotal:price,
